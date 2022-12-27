@@ -2,5 +2,6 @@
 - name: install tomcat and deploy the application
   hosts: all
   roles:
-    - role: roles/tomcat
+    - roles/tomcat_install
+    - roles/tomcat_deploy
       become: yes
