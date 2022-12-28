@@ -16,10 +16,12 @@
         username: admin
         password: admin
         dest: /tmp/spring-boot-thymeleaf-2.0.0.war
-        mode: '0644'
+        mode: '0755'
     - name: Deploy in tomcat
       copy:
         src: /tmp/spring-boot-thymeleaf-2.0.0.war
         dest: /opt/tomcat/webapps
         remote_src: yes
+      notify:
+        - reload the daemon, enable and start the tomcat service
 ...
