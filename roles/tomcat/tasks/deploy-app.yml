@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: remove artifact file 
+      file:
+        path: /tmp/spring-boot-thymeleaf-2.0.0.war
+        state: absent
+    - name: Nexus Artifact deploy
+      maven_artifact:
+        group_id: pl.codeleak.demos.sbt
+        artifact_id: spring-boot-thymeleaf
+        extension: war
+        version: 2.0.0
+        repository_url: "http://13.233.100.229:8081/repository/ansible/"
+        username: admin
+        password: admin
+        dest: /tmp/spring-boot-thymeleaf-2.0.0.war
+        mode: '0644'
+    - name: Deploy in tomcat
+      copy:
+        src: /tmp/spring-boot-thymeleaf-2.0.0.war
+        dest: /opt/tomcat/webapps
+        remote_src: yes
+...
