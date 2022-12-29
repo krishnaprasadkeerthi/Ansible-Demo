@@ -18,11 +18,21 @@
     password: admin
     dest: "{{ tmp_repo }}"
     mode: '0755'
+- name: remove artifact file in latest tomcat
+  file:
+    path: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    state: absent
 - name: Deploy in tomcat
   copy:
+#    src: /tmp/spring-boot-thymeleaf-2.0.0.war
+#    dest: /opt/tomcat/latest/webapps/spring-boot-thymeleaf-2.0.0.war
     src: "{{ tmp_repo }}"
     dest: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
     mode: '0755'
-    remote_src: yes
+    owner: tomcat
+    group: tomcat
+    force: true
+    remote_src: true
   notify:
     - reload the daemon, enable and start the tomcat service
+
