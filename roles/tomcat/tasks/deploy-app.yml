@@ -24,8 +24,8 @@
     state: absent
 - name: Deploy in tomcat
   copy:
-#    src: /tmp/spring-boot-thymeleaf-2.0.0.war
-#    dest: /opt/tomcat/latest/webapps/spring-boot-thymeleaf-2.0.0.war
+#   src: /tmp/spring-boot-thymeleaf-2.0.0.war
+#   dest: /opt/tomcat/latest/webapps/spring-boot-thymeleaf-2.0.0.war
     src: "{{ tmp_repo }}"
     dest: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
     mode: '0755'
