@@ -19,3 +19,9 @@ tomcat_allow_context_locations:
 - /opt/tomcat/latest/webapps/manager/META-INF/context.xml
 - /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
 
+
+# defaults for tomat application
+deploy_version: 2.0.0
+deploy_file_name: spring-boot-thymeleaf-{{ deploy_version }}.war
+deploy_url: http://13.233.100.229:8081/repository/ansible/
+tmp_repo: /tmp/{{ deploy_file_name }}
