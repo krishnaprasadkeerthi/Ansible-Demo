@@ -1,25 +1,38 @@
 ---
-- hosts: all
-  become: true
-  tasks:
-    - name: remove artifact file 
-      file:
-        path: /tmp/spring-boot-thymeleaf-2.0.0.war
-        state: absent
-    - name: Nexus Artifact deploy
-      maven_artifact:
-        group_id: pl.codeleak.demos.sbt
-        artifact_id: spring-boot-thymeleaf
-        extension: war
-        version: 2.0.0
-        repository_url: "http://13.233.100.229:8081/repository/ansible/"
-        username: admin
-        password: admin
-        dest: /tmp/spring-boot-thymeleaf-2.0.0.war
-        mode: '0644'
-    - name: Deploy in tomcat
-      copy:
-        src: /tmp/spring-boot-thymeleaf-2.0.0.war
-        dest: /opt/tomcat/webapps
-        remote_src: yes
-...
+- name: remove artifact file
+  file:
+    path: "{{ tmp_repo }}"
+    state: absent
+- name: Install PIP
+  apt: name=python-pip state=present
+- name: Install lxml
+  pip: name=lxml
+- name: Nexus Artifact deploy
+  maven_artifact:
+    group_id: pl.codeleak.demos.sbt
+    artifact_id: spring-boot-thymeleaf
+    extension: war
+    version: 2.0.0
+    repository_url: "{{ deploy_url }}"
+    username: admin
+    password: admin
+    dest: "{{ tmp_repo }}"
+    mode: '0755'
+- name: remove artifact file in latest tomcat
+  file:
+    path: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    state: absent
+- name: Deploy in tomcat
+  copy:
+#   src: /tmp/spring-boot-thymeleaf-2.0.0.war
+#   dest: /opt/tomcat/latest/webapps/spring-boot-thymeleaf-2.0.0.war
+    src: "{{ tmp_repo }}"
+    dest: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    mode: '0755'
+    owner: tomcat
+    group: tomcat
+    force: true
+    remote_src: true
+  notify:
+    - reload the daemon, enable and start the tomcat service
+

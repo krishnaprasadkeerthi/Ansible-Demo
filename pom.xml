@@ -19,7 +19,7 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!-- Inherit defaults from Spring Boot -->
+    <!-- Inherit defaults from the Spring Boot -->
     <!-- With this starter it is easier to override versions of libraries -->
 
     <parent>
