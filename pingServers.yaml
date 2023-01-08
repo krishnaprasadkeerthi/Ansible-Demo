@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Ping localhost and host server
+     ping:
+...
