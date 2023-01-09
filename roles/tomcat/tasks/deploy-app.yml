@@ -3,10 +3,13 @@
   file:
     path: "{{ tmp_repo }}"
     state: absent
-#- name: Install PIP
-#  apt: name=python-pip state=present
+- name: Install PIP3
+  apt: 
+    name: python3-pip 
+    state: present
 - name: Install lxml
-  pip: name=lxml
+  pip: 
+    name: lxml
 - name: Nexus Artifact deploy
   maven_artifact:
     group_id: pl.codeleak.demos.sbt
@@ -35,4 +38,3 @@
     remote_src: true
   notify:
     - reload the daemon, enable and start the tomcat service
-
