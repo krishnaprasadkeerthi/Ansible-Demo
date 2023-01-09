@@ -118,10 +118,10 @@ pipeline{
                 label 'ansible_agent'
             }
             steps{
-// 		  script {
-// 		        ansible.ansible_deploy_playbook('Inventory','playbook.yml')
-// 		  }             		    
- 		    sh 'ansible-playbook -i Inventory playbook.yml '
+		  script {
+		        ansible.ansible_deploy_playbook('Inventory','playbook.yml')
+		  }             		    
+//  		    sh 'ansible-playbook -i Inventory playbook.yml '
             }
         }
         
