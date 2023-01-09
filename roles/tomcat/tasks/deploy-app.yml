@@ -5,8 +5,8 @@
     state: absent
 #- name: Install PIP
 #  apt: name=python-pip state=present
-#- name: Install lxml
-#  pip: name=lxml
+- name: Install lxml
+  pip: name=lxml
 - name: Nexus Artifact deploy
   maven_artifact:
     group_id: pl.codeleak.demos.sbt
