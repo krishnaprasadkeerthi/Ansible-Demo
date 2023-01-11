@@ -61,7 +61,7 @@ pipeline{
            steps{
                withSonarQubeEnv('sonarqube8.9'){
                    script{
-                       sonarQube.sonarAnalysis('A1','Spring-Boot-Thymeleaf','http://3.111.150.28:9000','sqp_def8ec16daecd8ae2a1ade880d55cfcc97c5c530')
+                       sonarQube.sonarAnalysis('A1','Spring-Boot-Thymeleaf','http://13.233.84.193:9000','sqp_def8ec16daecd8ae2a1ade880d55cfcc97c5c530')
                    }
                }
            }
