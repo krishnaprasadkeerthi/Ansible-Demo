@@ -49,10 +49,10 @@ pipeline{
           steps{
               withSonarQubeEnv('sonarqube8.9'){
                   sh 'mvn sonar:sonar \
-                  -Dsonar.projectKey=A1	 \
+                  -Dsonar.projectKey=ansible	 \
 			     -Dsonar.projectName=Spring-Boot-Thymeleaf \
-			     -Dsonar.host.url=http://3.111.150.28:9000 \
-			     -Dsonar.login=sqp_def8ec16daecd8ae2a1ade880d55cfcc97c5c530' 
+			     -Dsonar.host.url=http://43.205.192.62:9000 \
+			     -Dsonar.login=sqa_5052c4cfb8102fe574a033ce23017c82a7639778' 
                  }
             }
         }
@@ -86,7 +86,7 @@ pipeline{
                 ],
                 credentialsId: 'nexus', 
                 groupId: 'pl.codeleak.demos.sbt', 
-                nexusUrl: '13.233.100.229:8081', 
+                nexusUrl: '52.66.243.13:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'ansible', 
