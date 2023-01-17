@@ -61,7 +61,7 @@ pipeline{
            steps{
                withSonarQubeEnv('sonarqube8.9'){
                    script{
-                       sonarQube.sonarAnalysis('A1','Spring-Boot-Thymeleaf','http://13.233.33.180:9000','sqp_def8ec16daecd8ae2a1ade880d55cfcc97c5c530')
+                       sonarQube.sonarAnalysis('ansible','Spring-Boot-Thymeleaf','http://43.205.192.62:9000','sqa_5052c4cfb8102fe574a033ce23017c82a7639778')
                    }
                }
            }
@@ -104,7 +104,7 @@ pipeline{
                       'war',
                       'nexus',
                       'pl.codeleak.demos.sbt',
-                      '13.233.100.229:8081',
+                      '52.66.243.13:8081',
                       'nexus3',
                       'http',
                       'ansible',
