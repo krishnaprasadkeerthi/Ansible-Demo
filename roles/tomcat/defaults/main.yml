@@ -7,7 +7,8 @@ java_home: /usr/lib/jvm/java-11-openjdk-amd64
 username: tomcat
 home_dir: /opt/tomcat
 default_shell: /bin/false
-tomcat_version: 9.0.70
+# tomcat_version: 9.0.70
+tomcat_version: 9.0.71
 tomcat_latest: /opt/tomcat/latest
 tomcat_bin_directory: /opt/tomcat/latest/bin/
 tomcat_service_location: /etc/systemd/system/tomcat.service
