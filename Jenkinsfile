@@ -118,7 +118,8 @@ pipeline{
                 label 'ansible_agent'
             }
             steps{
-   		    sh 'ansible-playbook -i Inventory playbook.yml'
+   		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml'		    
+//   		    sh 'ansible-playbook -i Inventory playbook.yml'
 // 		    sh 'ansible-playbook -i Inventory pingServers.yaml'
 		                }
         }
