@@ -2,10 +2,10 @@
 pipeline{
     agent any
 	
-    environment {
-       VAULT_CREDS= credentials("vault_id")
-       FILE = 'secret.txt'
-         }
+//     environment {
+//        VAULT_CREDS= credentials("vault_id")
+//        FILE = 'secret.txt'
+//          }
     
     stages{
 //       stage('Sample_Stage'){
@@ -122,8 +122,9 @@ pipeline{
                 label 'ansible_agent'
             }
             steps{
-		    sh "echo '${VAULT_CREDS_PSW}' > secret.txt"
-   		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml secret.txt'		    
+		    sh 'ansiblePlaybook inventory: 'Inventory', playbook: 'playbook.yml', vaultCredentialsId: 'ansible_vault''
+// 		    sh "echo '${VAULT_CREDS_PSW}' > secret.txt"
+//    		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml secret.txt'		    
 //   		    sh 'ansible-playbook -i Inventory playbook.yml'
 // 		    sh 'ansible-playbook -i Inventory pingServers.yaml'
 		                }
