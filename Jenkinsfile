@@ -1,7 +1,11 @@
 // @Library("Shared-Libraries") _
 pipeline{
     agent any
-    
+	
+    environment {
+       VAULT_CREDS= credentials("vault_id")
+       FILE = 'secret.txt'
+         }
     
     stages{
 //       stage('Sample_Stage'){
@@ -118,7 +122,8 @@ pipeline{
                 label 'ansible_agent'
             }
             steps{
-   		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml'		    
+		    sh "echo '${VAULT_CREDS_PSW}' > secret.txt"
+   		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file secret.txt'		    
 //   		    sh 'ansible-playbook -i Inventory playbook.yml'
 // 		    sh 'ansible-playbook -i Inventory pingServers.yaml'
 		                }
