@@ -122,9 +122,9 @@ pipeline{
                 label 'ansible_agent'
             }
             steps{
-//		    sh "echo '${VAULT_CREDS_PSW}' > secret.txt"
-//   		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml secret.txt'		    
-   		    sh 'ansible-playbook -i Inventory playbook.yml'
+		    sh "echo '${VAULT_CREDS_PSW}' > secret.txt"
+   		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml secret.txt'		    
+//   		    sh 'ansible-playbook -i Inventory playbook.yml'
 // 		    sh 'ansible-playbook -i Inventory pingServers.yaml'
 		                }
         }
