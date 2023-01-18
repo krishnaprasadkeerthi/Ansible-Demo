@@ -120,7 +120,8 @@ pipeline{
             steps{
 		  script {
 		        ansible.ansible_deploy_playbook('Inventory','pingServers.yaml')
-			ansible.ansible_deploy_playbook1('Inventory','playbook.yml','ansible_vault')
+			ansible.ansible_deploy_playbook('Inventory','playbook.yml')
+//			ansible.ansible_deploy_playbook1('Inventory','playbook.yml','ansible_vault')
 			
 		  }             		    
 //  		    sh 'ansible-playbook -i Inventory pingServers.yaml'
