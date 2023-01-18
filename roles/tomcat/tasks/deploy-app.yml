@@ -17,8 +17,11 @@
     extension: war
     version: 2.0.0
     repository_url: "{{ deploy_url }}"
-    username: admin
-    password: admin
+#    username: admin
+#    password: admin
+# Intergrating ansible_vault here for credentials
+    username: nexus_username
+    password: nexus_password
     dest: "{{ tmp_repo }}"
     mode: '0755'
 - name: remove artifact file in latest tomcat
