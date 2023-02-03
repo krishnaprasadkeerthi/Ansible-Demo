@@ -67,14 +67,14 @@ pipeline{
         }     
      
       
-	stage('Terraform'){
-	  agent{
-	     label 'ansible_agent'
-	  }
-	  steps{
-            sh 'terraform --version'
-		}
-	}
+// 	stage('Terraform'){
+// 	  agent{
+// 	     label 'ansible_agent'
+// 	  }
+// 	  steps{
+//             sh 'terraform --version'
+// 		}
+// 	}
 	    
         stage('Ansible'){
             agent{
