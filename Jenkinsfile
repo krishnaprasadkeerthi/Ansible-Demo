@@ -12,14 +12,6 @@ pipeline{
 //          }
     
     stages{
-//       stage('Sample_Stage'){
-//           steps{
-//               script{
-//                   welcome.sample('Welcome to demo on Jenkins Shared-Libraries')
-//               }
-//           }
-//       }
-
      
       stage('GIT_Checkout'){
           steps {
@@ -27,30 +19,12 @@ pipeline{
           }
       }
 
-//       stage('S_GIT_Checkout') {
-//         steps {
-//           script{
-//                     fetchCode.GitFetch()
-//                 }
-//               }   
-//             }
-
 
       stage('Maven_Build'){
          steps {
              sh 'mvn clean install'
          }
       }
-
-//       stage('S_MAven'){
-//           steps{
-//               script{
-//                   maven.mavenClean()
-//                   maven.mavenTest()
-//                   maven.mavenCleanInstall()
-//                   }
-//                }
-//             }
 
 
         stage('ExecuteSonarQubeReport'){
@@ -64,16 +38,6 @@ pipeline{
                  }
             }
         }
-
-//        stage(S_Sonar_Report){
-//            steps{
-//                withSonarQubeEnv('sonarqube8.9'){
-//                    script{
-//                        sonarQube.sonarAnalysis('A1','Spring-Boot-Thymeleaf','http://3.111.150.28:9000','sqp_def8ec16daecd8ae2a1ade880d55cfcc97c5c530')
-//                    }
-//                }
-//            }
-//        }
 
     //   stage(S_Quality_gates){
     //       steps{
@@ -102,25 +66,16 @@ pipeline{
             }
         }     
      
-//         stage('S_NexusArtifactUploader'){
-//             steps{
-//                 script {
-//                       nexus.nexus(
-//                       'spring-boot-thymeleaf',
-//                       '',
-//                       '/var/lib/jenkins/.m2/repository/pl/codeleak/demos/sbt/spring-boot-thymeleaf/2.0.0/spring-boot-thymeleaf-2.0.0.war',
-//                       'war',
-//                       'nexus',
-//                       'pl.codeleak.demos.sbt',
-//                       '13.233.100.229:8081',
-//                       'nexus3',
-//                       'http',
-//                       'ansible',
-//                       '2.0.0')
-//                 }
-//             }
-//         }
-     
+      
+	stage('Terraform'){
+	  agent{
+	     label 'ansible_agent'
+	  }
+	  steps{
+            sh 'terraform --version'
+		}
+	}
+	    
         stage('Ansible'){
             agent{
                 label 'ansible_agent'
@@ -133,17 +88,6 @@ pipeline{
 // 		    sh 'ansible-playbook -i Inventory pingServers.yaml'
 		                }
         }
-
-//         stage('Ansible'){
-//             agent{
-//                 label 'ansible_agent'
-//             }
-//             steps{
-// 		  script {
-// 		        ansible.ansible_deploy_playbook('Inventory','playbook.yml')
-// 		  }             		    
-//             }
-//         }
 
 	   	    
     }
