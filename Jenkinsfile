@@ -75,6 +75,16 @@ pipeline{
             sh 'terraform --version'
 		}
 	}
+
+		stage('Terraform'){
+	  agent{
+	     label 'terraform_agent'
+	  }
+	  steps{
+            sh 'terraform init'
+		}
+	}
+
 	    
         stage('Ansible'){
             agent{
