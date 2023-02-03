@@ -46,25 +46,25 @@ pipeline{
     //   }
 
 
-//         stage('NexusArtifactUploader'){
-//             steps{
-//                 nexusArtifactUploader artifacts: [
-//                     [
-//                      artifactId: 'spring-boot-thymeleaf',
-//                      classifier: '',
-//                      file: '/var/lib/jenkins/.m2/repository/pl/codeleak/demos/sbt/spring-boot-thymeleaf/2.0.0/spring-boot-thymeleaf-2.0.0.war',
-//                      type: 'war'
-//                      ]
-//                 ],
-//                 credentialsId: 'nexus', 
-//                 groupId: 'pl.codeleak.demos.sbt', 
-//                 nexusUrl: '52.66.243.13:8081', 
-//                 nexusVersion: 'nexus3', 
-//                 protocol: 'http', 
-//                 repository: 'ansible', 
-//                 version: '2.0.0'
-//             }
-//         }     
+        stage('NexusArtifactUploader'){
+            steps{
+                nexusArtifactUploader artifacts: [
+                    [
+                     artifactId: 'spring-boot-thymeleaf',
+                     classifier: '',
+                     file: '/var/lib/jenkins/.m2/repository/pl/codeleak/demos/sbt/spring-boot-thymeleaf/2.0.0/spring-boot-thymeleaf-2.0.0.war',
+                     type: 'war'
+                     ]
+                ],
+                credentialsId: 'nexus', 
+                groupId: 'pl.codeleak.demos.sbt', 
+                nexusUrl: '52.66.243.13:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: 'ansible', 
+                version: '2.0.0'
+            }
+        }     
      
       
 // 	stage('Terraform'){
