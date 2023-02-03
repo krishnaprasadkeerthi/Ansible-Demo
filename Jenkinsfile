@@ -76,7 +76,7 @@ pipeline{
 		}
 	}
 
-		stage('Terraform'){
+		stage('Terraform-init'){
 	  agent{
 	     label 'terraform_agent'
 	  }
