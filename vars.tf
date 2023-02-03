@@ -15,7 +15,7 @@ variable "instance_type" {
 
 variable "instances_count" {
   description = "No of Instances"
-#  default     = "2"
+  default     = "2"
 }
 
 variable "security_groups" {
