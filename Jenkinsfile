@@ -1,6 +1,10 @@
 // @Library("Shared-Libraries") _
 pipeline{
     agent any
+  
+   tools {
+        maven "M3"
+    }
 	
 //     environment {
 //        VAULT_CREDS= credentials("vault_id")
