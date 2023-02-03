@@ -73,15 +73,17 @@ pipeline{
 	  }
 	  steps{
             sh 'terraform --version'
+            sh 'terraform init'
+            sh 'terraform validate'
 		}
 	}
 
-		stage('Terraform-init'){
+		stage('Terraform-Action'){
 	  agent{
 	     label 'terraform_agent'
 	  }
 	  steps{
-            sh 'terraform init'
+            sh 'terraform apply -auto-approve'
 		}
 	}
 
