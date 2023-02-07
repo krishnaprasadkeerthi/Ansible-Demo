@@ -1,13 +1,40 @@
 provider "aws" {
-  region = var.region
+  region = "ap-south-1"
 }
-resource "aws_instance" "sample-instance" {
-  count           = var.instances_count
-  ami             = var.ami
-  instance_type   = var.instance_type
-  security_groups = ["${var.security_groups}"]
-  key_name        = var.key
+resource "aws_instance" "slave" {
+  ami                    = "ami-06984ea821ac0a879"
+  instance_type          = "t2.micro"
+  key_name               = "kavya"
+  availability_zone      = "ap-south-1a"
+  vpc_security_group_ids = [aws_security_group.my-ec2-security.id]
   tags = {
-    Name = "First Terraform Instance - ${count.index}"
+     Name = "my-ec2-instance"
+  } 
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.slave.public_ip} >> dev.ini"
+  }
+} 
+ resource "aws_security_group" "my-ec2-security" {
+  name = "my-ec2-security"   
+  ingress {
+    description = "Allow port 22 - inbound"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "Allow port 8080 - inbound"
+    from_port   = 8080
+    to_port     = 8080 
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }   
+  egress {
+    description = "outbound"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
