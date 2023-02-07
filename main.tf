@@ -9,7 +9,7 @@ resource "aws_instance" "slave" {
   availability_zone      = "ap-south-1a"
   vpc_security_group_ids = [aws_security_group.my-ec2-security.id]
   tags = {
-     Name = "my-ec2-instance - ${count.index}"
+     Name = "aws_instance.slave[count.index]"
   } 
   provisioner "local-exec" {
     command = "echo ${aws_instance.slave.public_ip} >> dev.ini"
