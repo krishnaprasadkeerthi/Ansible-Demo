@@ -2,15 +2,16 @@ provider "aws" {
   region = "ap-south-1"
 }
 resource "aws_instance" "slave" {
-  count                  = "2"
+#  count                  = "2"
   ami                    = "ami-06984ea821ac0a879"
   instance_type          = "t2.micro"
   key_name               = "kavya"
   availability_zone      = "ap-south-1a"
   vpc_security_group_ids = [aws_security_group.my-ec2-security.id]
   tags = {
+     Name = "my-ec2-instance"
 #     Name = "my-ec2-instance - ${count.index}"
-     Name = "First Terraform Instance - ${count.index}"
+#     Name = "First Terraform Instance - ${count.index}"
   } 
   provisioner "local-exec" {
     command = "echo ${aws_instance.slave.public_ip} >> dev.ini"
