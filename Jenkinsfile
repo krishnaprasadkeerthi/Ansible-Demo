@@ -84,6 +84,7 @@ pipeline{
 	  }
 	  steps{
             sh 'terraform apply -auto-approve'
+		  sleep(16)
 		}
 	}
 
