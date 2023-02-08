@@ -94,7 +94,7 @@ pipeline{
             }
             steps{
                     sh 'chmod 400 kavya.pem'            
-                    sh 'ansible aws_ec2 -i aws_ec2.yaml -m ping --ssh-common-args="-o StrictHostKeyChecking=no" -u ubuntu --private-key=/home/ansible/kavya.pem'
+                    sh 'ansible aws_ec2 -i aws_ec2.yaml -m ping --ssh-common-args="-o StrictHostKeyChecking=no" -u ubuntu --private-key=kavya.pem'
 //		    ansiblePlaybook inventory: 'Inventory', playbook: 'playbook.yml', vaultCredentialsId: 'ansible_vault'
 // 		    sh "echo '${VAULT_CREDS_PSW}' > secret.txt"
 //    		    sh 'ansible-playbook -i Inventory playbook.yml --vault-password-file cred.yml secret.txt'		    
