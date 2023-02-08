@@ -1,0 +1,9 @@
+plugin: aws_ec2
+regions:
+  - ap-south-1
+ansible_user: ubuntu
+filters:
+  instance-state-name: running
+  # All instances with their 'name` tag set to `my-ec2-instance`
+  tag:Name:
+     - my-ec2-instance
