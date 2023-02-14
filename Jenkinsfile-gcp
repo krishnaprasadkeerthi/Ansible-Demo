@@ -1,0 +1,68 @@
+pipeline {
+    agent any 
+    
+    tools {
+       maven 'M3'
+    }
+    
+    stages {
+        stage('GIT_checkout'){
+            steps{
+                git 'https://github.com/krishnaprasadkeerthi/Ansible-Demo.git'
+            }
+        }
+        
+        stage('Maven_build'){
+            steps{
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage('ExecuteSonarQubeReport'){
+          steps{
+              withSonarQubeEnv('sonarqube8.9'){
+                  sh 'mvn sonar:sonar \
+                 -Dsonar.projectKey=Spring-Boot-kp	 \
+			     -Dsonar.projectName=Spring-Boot-Thymeleaf \
+			     -Dsonar.host.url=http://34.28.226.94:9000 \
+			     -Dsonar.login=sqa_1faea32613a13f23a6b5f575fd9015caad243bdb' 
+                 }
+            }
+        }
+        
+        stage('NexusArtifactUploader'){
+            steps{
+                nexusArtifactUploader artifacts: [
+                    [
+                     artifactId: 'spring-boot-thymeleaf',
+                     classifier: '',
+                     file: '/var/lib/jenkins/.m2/repository/pl/codeleak/demos/sbt/spring-boot-thymeleaf/2.0.0/spring-boot-thymeleaf-2.0.0.war',
+                     type: 'war'
+                     ]
+                ],
+                credentialsId: 'nexus', 
+                groupId: 'pl.codeleak.demos.sbt', 
+                nexusUrl: '34.29.176.69:8081',
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: 'springboot', 
+                version: '2.0.0'
+            }
+        }             
+        
+stage('Ansible'){
+            agent{
+                label 'ansible_agent'
+            }
+            steps{
+                    sh 'ansible --version'
+                    sh 'ansible all -i InventoryGCP -m ping'
+		                }
+        }
+        
+        
+        
+        
+        
+    }
+}
