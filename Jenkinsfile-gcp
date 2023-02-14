@@ -58,6 +58,7 @@ stage('Ansible'){
                     sh 'ansible --version'
                     sh 'ansible all -i InventoryGCP -m ping'
 		    sh 'ansible-playbook -i InventoryGCP pingServers.yaml'
+		    sh 'ansible-playbook -i InventoryGCP playbook.yml'
 		                }
         }
         
